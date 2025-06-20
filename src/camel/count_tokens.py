@@ -148,7 +148,9 @@ def get_q_llm_input_outputs(messages: list[ChatToolResultMessage]) -> tuple[list
     return q_llm_inputs, q_llm_outputs
 
 
-def get_input_and_output_text_camel_separate(messages: Sequence[ChatMessage]) -> tuple[tuple[list[str], list[str]], tuple[list[str], list[str]]]:
+def get_input_and_output_text_camel_separate(
+    messages: Sequence[ChatMessage],
+) -> tuple[tuple[list[str], list[str]], tuple[list[str], list[str]]]:
     messages = [message for message in messages if message["role"] != "system"]
     turns = make_camel_turns(messages[1:])
 
@@ -170,14 +172,13 @@ def get_input_and_output_text_camel_separate(messages: Sequence[ChatMessage]) ->
             turn_overall_content += wrap_message(get_text_content_as_str(turn.error_message["content"] or []))
         p_llm_input_content.append(turn_overall_content)
 
-    input_content = [*p_llm_input_content, *q_llm_input_content]
-    output_content = [*p_llm_output_content, *q_llm_output_content]
-
     return (p_llm_input_content, p_llm_output_content), (q_llm_input_content, q_llm_output_content)
 
 
 def get_input_and_output_text_camel(messages: Sequence[ChatMessage]) -> tuple[list[str], list[str]]:
-    (p_llm_input_content, p_llm_output_content), (q_llm_input_content, q_llm_output_content) = get_input_and_output_text_camel_separate(messages)
+    (p_llm_input_content, p_llm_output_content), (q_llm_input_content, q_llm_output_content) = (
+        get_input_and_output_text_camel_separate(messages)
+    )
 
     input_content = [*p_llm_input_content, *q_llm_input_content]
     output_content = [*p_llm_output_content, *q_llm_output_content]

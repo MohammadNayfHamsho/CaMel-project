@@ -19,9 +19,9 @@ from agentdojo import attacks, benchmark, logging
 from agentdojo.task_suite import get_suite
 from openai.types.chat import ChatCompletionReasoningEffort
 
+import camel.custom_yaml  # noqa
 from camel.interpreter.interpreter import MetadataEvalMode
 from camel.models import make_tools_pipeline
-import camel.custom_yaml  # noqa
 
 
 def main(
@@ -35,7 +35,7 @@ def main(
     suites: list[str] | None = None,
     eval_mode: MetadataEvalMode = MetadataEvalMode.NORMAL,
     q_llm: str | None = None,
-    user_tasks: list[str] | None = None
+    user_tasks: list[str] | None = None,
 ):
     """Example usage of the defense.
 
@@ -43,7 +43,7 @@ def main(
     Other newer models might work as well.
 
     Args:
-        model: the model to use
+        model: the model to use. it should be {provider}:model_name. For example, "google:gemini-2.5-pro-preview-06-05".
         use_original: whether to use the original model with tool calling API instead of CaMeL
         reasoning_effort: for OpenAI reasoning models. How much the model should reason. Can be "low", "medium", "high".
         thinking_budget_tokens: how many tokens Anthropic reasoning models can use. Note that Anthropic reasoning models are not supported yet.

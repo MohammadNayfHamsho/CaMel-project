@@ -1,15 +1,19 @@
+from datetime import time
+
 import yaml
-from datetime import date, time, datetime
 
 # Custom tag names for YAML
-TIME_TAG = '!time'
+TIME_TAG = "!time"
+
 
 def time_representer(dumper, data):
     return dumper.represent_scalar(TIME_TAG, data.isoformat())
 
+
 def time_constructor(loader, node):
     value = loader.construct_scalar(node)
     return time.fromisoformat(value)
+
 
 # Register representers
 yaml.add_representer(time, time_representer)

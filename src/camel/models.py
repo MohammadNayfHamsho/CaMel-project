@@ -3,17 +3,15 @@ import time
 
 import anthropic
 import openai
-import vertexai
-from google import genai
 from agentdojo import agent_pipeline, functions_runtime
 from agentdojo.agent_pipeline.agent_pipeline import load_system_message
 from agentdojo.models import MODEL_NAMES
+from google import genai
 from openai.types.chat import ChatCompletionReasoningEffort
 from pydantic_ai.models import KnownModelName
 
 from camel.interpreter.interpreter import MetadataEvalMode
 from camel.pipeline_elements.anthropic_tool_filter import AnthropicLLMToolFilter
-from camel.pipeline_elements.old_google_llm import GoogleLLM
 from camel.pipeline_elements.privileged_llm import PrivilegedLLM
 from camel.pipeline_elements.replay_privileged_llm import PrivilegedLLMReplayer, UserInjectionTasksGetter
 from camel.pipeline_elements.security_policies import (

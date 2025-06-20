@@ -11,7 +11,9 @@ Edoardo Debenedetti<sup>1,3</sup>, Ilia Shumailov<sup>2</sup>, Tianqi Fan<sup>1<
 
 ## Pre-requisites
 
-Install `uv` via the [official instructions](https://docs.astral.sh/uv/getting-started/installation/)
+1. Install `uv` via the [official instructions](https://docs.astral.sh/uv/getting-started/installation/).
+2. Rename `.env.example` to `.env` and populate it with your API keys.
+3. `uv` will install all dependencies as soon as you run `uv run ...`.
 
 ## Running running the defense against AgentDojo
 
@@ -20,6 +22,16 @@ uv run --env-file .env main.py MODEL_NAME [--use-original] [--ad_defense] [--rea
 ```
 
 More details on the various CLI arguments can be found by running `uv run main.py --help`
+
+## FAQ
+
+> How do I try a new/different model?
+
+You can add it to the [`models.py`](src/camel/models.py) file, in the `_supported_model_names` variable. The keys are the model names with the given provider (check the provider's API) and the values is what the model says when asked "what model are you?". Keep in mind that OpenAI reasoning models are stored in the `_oai_thinking_models` variable instead.
+
+> If I have questions on the codebase how can I reach out?
+
+Please open an issue in this repository. Please note that we are not planning to fix bugs as this codebase is just meant as a research artifact.
 
 ## Running tests and linters
 

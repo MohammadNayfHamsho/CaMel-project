@@ -16,11 +16,11 @@
 
 import dataclasses
 import time
-import yaml
 from collections.abc import Callable, Iterable, Sequence
 from typing import Any, TypeVar
 
 import pydantic
+import yaml
 from agentdojo import agent_pipeline, functions_runtime
 from agentdojo import types as ad_types
 from agentdojo.agent_pipeline import tool_execution
@@ -43,10 +43,12 @@ from camel.pipeline_elements.security_policies import (
     AgentDojoSecurityPolicyEngine,
 )
 
+
 # Now yaml.safe_dump will work with datetime objects
 # But you'd need to use yaml.dump instead of yaml.safe_dump
 def custom_yaml_dump(obj: dict | list) -> str:
     return yaml.dump(obj, default_flow_style=False)
+
 
 _T = TypeVar("_T", bound=str | int | float | pydantic.BaseModel)
 _E = TypeVar("_E", bound=functions_runtime.TaskEnvironment)
@@ -192,10 +194,6 @@ def _highlight_exception_code(
 def _get_quarantined_llm(model: KnownModelName) -> KnownModelName:
     if "openai" in model and "o1" in model:
         return "openai:gpt-4o"
-    if "google-vertex:" in model and ("thinking" in model or "gemini-exp-1206" in model):
-        return "google-vertex:gemini-2.0-flash-exp"
-    if "google-gla:" in model and "thinking" in model:
-        return "google-gla:gemini-2.0-flash-exp"
     return model
 
 
@@ -360,7 +358,11 @@ class PrivilegedLLM(agent_pipeline.BasePipelineElement):
                 ad_types.ChatToolResultMessage(
                     role="tool",
                     tool_call=tool_call,
-                    content=[ad_types.text_content_block_from_string(tool_execution.tool_result_to_str(tool_result, dump_fn=custom_yaml_dump))],
+                    content=[
+                        ad_types.text_content_block_from_string(
+                            tool_execution.tool_result_to_str(tool_result, dump_fn=custom_yaml_dump)
+                        )
+                    ],
                     tool_call_id=None,
                     error=None,
                 )
