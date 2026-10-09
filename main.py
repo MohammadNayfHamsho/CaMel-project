@@ -20,7 +20,7 @@ from agentdojo.task_suite import get_suite
 from openai.types.chat import ChatCompletionReasoningEffort
 
 import camel.custom_yaml  # noqa
-from camel.interpreter.interpreter import MetadataEvalMode
+from camel.interpreter.js_interpreter import MetadataEvalMode
 from camel.models import make_tools_pipeline
 
 

@@ -19,8 +19,8 @@ class MockLLMHandler(BaseHTTPRequestHandler):
             
         # If pydantic-ai requests structured output, it might specify response_format or tools
         is_json_request = "response_format" in req_body or "tools" in req_body
-        python_code = "```python\nprint('mock response')\n```"
-        mock_content = '{"output": "mock output", "have_enough_information": true}' if is_json_request else python_code
+        javascript_code = "```javascript\nconsole.log('mock response');\n```"
+        mock_content = '{"output": "mock output", "have_enough_information": true}' if is_json_request else javascript_code
 
         response_body = {
             "id": "chatcmpl-mock123",

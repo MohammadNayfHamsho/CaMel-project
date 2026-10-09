@@ -10,7 +10,7 @@ from google import genai
 from openai.types.chat import ChatCompletionReasoningEffort
 from pydantic_ai.models import KnownModelName
 
-from camel.interpreter.interpreter import MetadataEvalMode
+from camel.interpreter.js_interpreter import MetadataEvalMode
 from camel.pipeline_elements.anthropic_tool_filter import AnthropicLLMToolFilter
 from camel.pipeline_elements.privileged_llm import PrivilegedLLM
 from camel.pipeline_elements.replay_privileged_llm import PrivilegedLLMReplayer, UserInjectionTasksGetter

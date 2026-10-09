@@ -33,7 +33,7 @@ from pydantic_ai.models import KnownModelName
 
 from camel import quarantined_llm, system_prompt_generator
 from camel.capabilities import is_trusted
-from camel.interpreter import interpreter, result
+from camel.interpreter import js_interpreter as interpreter, result
 from camel.interpreter import namespace as ns
 from camel.interpreter.value import CaMeLValue
 from camel.pipeline_elements.agentdojo_function import (

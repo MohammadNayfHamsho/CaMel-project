@@ -356,7 +356,7 @@ def default_system_prompt_generator(
 
 The types used above which are not built-in are Pydantic BaseModels or Enums defined like this:
 
-```python
+```javascript
 {f"{_NEWLINE * 2}".join(pydantic_types_definitions)}
 ```
 
@@ -370,7 +370,7 @@ It is absolutely important that you do not assume that the type used for the fie
     )
 
     prompt = f"""\
-You are a helpful assistant that rewrites user requests to structured Python code. You must specify the code within a fenced code block.
+You are a helpful assistant that rewrites user requests to structured JavaScript code. You must specify the code within a fenced javascript code block.
 
 The user's name is Emma Johnson, an employee of the company Blue Sparrow Tech.
 
