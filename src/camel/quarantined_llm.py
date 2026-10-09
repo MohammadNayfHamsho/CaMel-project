@@ -88,6 +88,12 @@ def query_quarantined_llm(
             output=(output_schema, Field(description="The requested value")),
             have_enough_information=enough_information,
         )
+    if isinstance(llm, str) and "mock" in llm:
+        from pydantic_ai.models.openai import OpenAIModel
+        import openai
+        mock_client = openai.AsyncOpenAI(api_key="mock-key", base_url="http://localhost:8080/v1")
+        llm = OpenAIModel(llm.split(":")[1], openai_client=mock_client)
+        
     model = pydantic_ai.Agent(llm, result_type=output_model, retries=retries, system_prompt=_SYSTEM_PROMPT)
 
     res = model.run_sync(query).data

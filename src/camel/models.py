@@ -36,6 +36,7 @@ _oai_thinking_models_with_effort = {
 }
 _supported_model_names = {
     "gemini-2.5-flash-preview-05-20": "AI model developed by Google",
+    "gemini-3.8-flash": "AI model developed by Google",
     "gemini-2.5-pro-preview-06-05": "AI model developed by Google",
     "gemini-2.0-flash-lite-001": "AI model developed by Google",
     "claude-3-5-haiku-20241022": "Claude",
@@ -47,6 +48,7 @@ _supported_model_names = {
     "gpt-4o-mini-2024-07-18": "GPT-4",
     "gpt-4.1-2025-04-14": "ChatGPT",
     "gpt-4.1-nano-2025-04-14": "ChatGPT",
+    "mock-model": "Mock",
 } | _oai_thinking_models_with_effort
 suffixes = ["", "+camel", "+camel+secpol", "+camel+secpol+strict"]
 
@@ -123,6 +125,9 @@ def make_tools_pipeline(
         llm = agent_pipeline.AnthropicLLM(
             client, model.split(":")[1], thinking_budget_tokens=thinking_budget_tokens, max_tokens=max_tokens
         )
+    elif "mock" in model:
+        client = openai.OpenAI(api_key="mock-key", base_url="http://localhost:8080/v1")
+        llm = agent_pipeline.OpenAILLM(client, model.split(":")[1], None)
     else:
         raise ValueError("Invalid model")
 
