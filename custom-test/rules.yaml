@@ -1,0 +1,25 @@
+rules:
+  - id: replace-insecure-call
+    message: Use doSomethingSafely instead of doSomething.
+    severity: WARNING
+    languages: [javascript]
+    pattern: doSomething($X)
+    fix: doSomethingSafely($X)
+    
+
+  - id: js-taint-source-to-sink
+    message: Untrusted data from a source flows into a dangerous sink.
+    severity: ERROR
+    languages: [javascript]
+    mode: taint
+    pattern-sources:
+      - pattern: getUserInput(...)
+    pattern-sinks:
+      - pattern: eval(...)
+      
+
+  - id: detect-eval-js
+    message: Avoid using eval() as it introduces security risks.
+    severity: WARNING
+    languages: [javascript]
+    pattern: eval(...)

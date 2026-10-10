@@ -85,7 +85,7 @@ def main(
                     suite,
                     attack,
                     logdir,
-                    force_rerun=False,
+                    force_rerun=True,
                     user_tasks=user_tasks,
                 )
             else:
@@ -93,7 +93,7 @@ def main(
                     tools_pipeline,
                     suite,
                     logdir,
-                    force_rerun=False,
+                    force_rerun=True,
                     user_tasks=user_tasks,
                 )
 

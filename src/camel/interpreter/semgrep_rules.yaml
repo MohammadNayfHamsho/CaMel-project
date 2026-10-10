@@ -1,0 +1,30 @@
+rules:
+  - id: camel-js-untrusted-data-to-sensitive-call
+    mode: taint
+    languages: [javascript]
+    severity: WARNING
+    message: Data from an external source reaches a sensitive call.
+    pattern-sources:
+      - pattern: query_ai_assistant(...)
+      - pattern: search_emails(...)
+      - pattern: get_unread_emails(...)
+      - pattern: get_received_emails(...)
+      - pattern: get_file_by_id(...)
+      - pattern: read_file(...)
+      - pattern: get_webpage(...)
+      - pattern: $RESPONSE.text(...)
+      - pattern: $RESPONSE.json(...)
+      - pattern: process.argv
+      - pattern: process.env
+    pattern-sinks:
+      - pattern: send_email(...)
+      - pattern: share_file(...)
+      - pattern: send_money(...)
+      - pattern: delete_file(...)
+      - pattern: delete_email(...)
+      - pattern: eval(...)
+      - pattern: new Function(...)
+      - pattern: exec(...)
+      - pattern: execSync(...)
+      - pattern: $CHILD.exec(...)
+      - pattern: $CHILD.execSync(...)
