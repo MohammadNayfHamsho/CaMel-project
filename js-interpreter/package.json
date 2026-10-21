@@ -1,0 +1,14 @@
+{
+  "name": "camel-js-interpreter",
+  "version": "0.1.0",
+  "description": "CaMeL interpreter for JavaScript plans: runs a JS subset step by step while tracking capabilities and dependencies.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "acorn": "^8.14.0"
+  }
+}
